@@ -21,11 +21,15 @@ feature_names = joblib.load("feature_names.pkl")
 st.markdown("""
 <style>
 
+.main {
+    background-color:#0F172A;
+}
+
 .stButton > button {
     width:100%;
     height:60px;
-    border-radius:15px;
-    background:linear-gradient(90deg,#1565C0,#42A5F5);
+    border-radius:12px;
+    background:linear-gradient(90deg,#059669,#14B8A6);
     color:white;
     font-size:20px;
     font-weight:bold;
@@ -36,10 +40,15 @@ st.markdown("""
     transform:scale(1.02);
 }
 
-div[data-testid="stMetric"]{
-    background:#F5F9FF;
-    padding:15px;
+[data-testid="stMetric"]{
+    background:#111827;
+    border:1px solid #1F2937;
     border-radius:12px;
+    padding:15px;
+}
+
+.block-container{
+    padding-top:2rem;
 }
 
 </style>
@@ -88,16 +97,27 @@ This application is intended for educational and portfolio purposes only.
 # ---------------- HEADER ---------------- #
 
 st.markdown("""
-<h1 style='text-align:center;color:#1565C0;'>
-🏦 Customer Churn Prediction
+<h1 style='text-align:center;color:#14B8A6;'>
+🏦 Customer Churn Prediction Dashboard
 </h1>
 
-<p style='text-align:center;font-size:18px;color:gray;'>
-AI-Powered Customer Retention Analytics
+<p style='text-align:center;font-size:18px;color:#94A3B8;'>
+Customer Retention & Risk Analytics Platform
 </p>
 """, unsafe_allow_html=True)
 
 st.markdown("---")
+
+k1, k2, k3 = st.columns(3)
+
+with k1:
+    st.metric("Features Used", "11")
+
+with k2:
+    st.metric("Model Type", "Gradient Boosting")
+
+with k3:
+    st.metric("Industry", "Banking")
 
 st.warning("""
 ⚠️ Disclaimer
@@ -107,7 +127,11 @@ Predictions are generated using a machine learning model and should be used only
 
 # ---------------- INPUTS ---------------- #
 
-st.subheader("👤 Customer Information")
+st.markdown("""
+### 👤 Customer Information
+
+Enter customer demographic and banking details to evaluate churn risk.
+""")
 
 col1, col2 = st.columns(2)
 
@@ -217,7 +241,7 @@ if st.button("🔍 Predict Churn Risk"):
 
     st.markdown(f"""
     <div style="
-    background:linear-gradient(90deg,#0D47A1,#1976D2);
+    background:linear-gradient(90deg,#064E3B,#0F766E);
     padding:25px;
     border-radius:15px;
     color:white;
@@ -255,6 +279,7 @@ if st.button("🔍 Predict Churn Risk"):
         )
 
     if prediction[0] == 1:
+            
 
         st.error(
             "Prediction: Customer Will Churn"
@@ -264,6 +289,26 @@ if st.button("🔍 Predict Churn Risk"):
 
         st.success(
             "Prediction: Customer Will Stay"
+        )
+
+    st.markdown("### 💡 Retention Recommendation")
+
+    if probability < 0.30:
+
+        st.success(
+            "Customer appears loyal. Continue maintaining service quality and engagement."
+        )
+
+    elif probability < 0.70:
+
+        st.warning(
+            "Customer may be at risk. Consider personalized offers, rewards or proactive communication."
+        )
+
+    else:
+
+        st.error(
+            "Immediate retention action recommended. Customer shows strong churn indicators."
         )
 
 # ---------------- PROJECT INFO ---------------- #
