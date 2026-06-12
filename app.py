@@ -340,9 +340,7 @@ The model analyzes customer demographics, banking behavior, account characterist
 
 Bank Customer Churn Prediction Dataset
 
-### Developer
 
-Kalyani M G
 """)
 
 st.markdown("---")
