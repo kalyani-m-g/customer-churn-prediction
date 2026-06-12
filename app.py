@@ -239,24 +239,21 @@ if st.button("🔍 Predict Churn Risk"):
 
     st.subheader("📊 Prediction Results")
 
-    st.markdown(f"""
+    st.markdown(
+    f"""
     <div style="
-    background:linear-gradient(90deg,#064E3B,#0F766E);
-    padding:25px;
-    border-radius:15px;
-    color:white;
-    margin-bottom:20px;
+        background:linear-gradient(90deg,#064E3B,#0F766E);
+        padding:25px;
+        border-radius:15px;
+        color:white;
+        margin-bottom:20px;
     ">
-        <h4 style="margin:0;">
-        Churn Probability
-        </h4>
-
-        <h1 style="margin-top:10px;">
-        {probability*100:.2f}%
-        </h1>
-
+        <h4>Churn Probability</h4>
+        <h1>{probability*100:.2f}%</h1>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
     st.progress(float(probability))
 
